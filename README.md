@@ -6,6 +6,7 @@ Componentes implementados:
 1. **`config.py`** centraliza rutas, metadatos de fuentes, formatos, delimitadores y reglas de negocio compartidas.
 2. **`dbt_project.yml`** define la separación de capas en dbt, materializaciones, tests, snapshots y variables configurables.
 3. **`file_utils.py`** valida existencia de archivos, lee CSV/Parquet/TXT, normaliza columnas y agrega metadatos de linaje.
+4. **`01_validacion_file_utils.ipynb`** Notebok para validar el proceso y los pipelines.
 
 La validación en notebook confirmó lecturas exitosas para productos, clientes, devoluciones y órdenes, comprobando que el contrato entre archivos RAW y utilidades de ingesta es estable.
 
