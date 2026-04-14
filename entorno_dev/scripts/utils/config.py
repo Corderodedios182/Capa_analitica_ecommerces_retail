@@ -3,6 +3,7 @@
 """
 
 Configuración de lectura de archivos.
+Entrada al Pipeline
 
 	•   rutas
 	•	nombres de archivos
@@ -12,13 +13,17 @@ Configuración de lectura de archivos.
 
 """
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict
 
 
 BASE_DIR = Path("data/raw").resolve().parents[2]
 
 DATA_DIR = BASE_DIR / "data"
 RAW_DIR = DATA_DIR / "raw"
+PROCESSED_DIR = DATA_DIR / "processed"
+WAREHOUSE_DIR = DATA_DIR / "warehouse"
+DOCS_DIR = BASE_DIR / "docs"
+DBT_PROJECT_DIR = BASE_DIR / "dbt_project" / "mercado"
 
 SOURCES_CONFIG: Dict[str, Dict] = {
     "clientes_cdmx": {
@@ -144,4 +149,14 @@ SOURCES_CONFIG: Dict[str, Dict] = {
             "estandarizar_schema_devoluciones",
         ],
     },
+}
+
+BUSINESS_RULES = {
+    "return_invalidation_days": 30,
+    "valid_payment_statuses": [
+        "confirmado",
+        "confirmed",
+        "paid_confirmed",
+        "pagado",
+    ],
 }

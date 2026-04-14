@@ -1,36 +1,67 @@
-name: 'mercado'
-version: '1.0.0'
+
+#Modelado de salidas analiticas
+
+name: "mercado"
+version: "1.0.0"
 config-version: 2
 
-profile: 'mercado'
+profile: "mercado"
 
 model-paths: ["models"]
-seed-paths:  ["seeds"]
-test-paths:  ["tests"]
+seed-paths: ["seeds"]
 macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+test-paths: ["tests"]
+analysis-paths: ["analyses"]
 
 target-path: "target"
-clean-targets: ["target", "dbt_packages"]
+clean-targets:
+  - "target"
+  - "dbt_packages"
+  - "logs"
 
-# ── Variables de negocio configurables ───────────────────────────────────────
-# Modifica estos valores aquí o pásalos en tiempo de ejecución:
-#   dbt run --vars '{"plazo_devolucion_dias": 15}'
 vars:
-  plazo_devolucion_dias:          30
-  ventana_cliente_activo_meses:   12
-  umbral_recompra_dias:           7
+  return_invalidation_days: 30
+  valid_payment_statuses:
+    - "confirmado"
+    - "confirmed"
+    - "paid_confirmed"
+    - "pagado"
 
-# ── Configuración de materializaciones por capa ───────────────────────────────
 models:
   mercado:
+    +persist_docs:
+      relation: true
+      columns: true
+
     staging:
-      +materialized: view
       +schema: staging
+      +materialized: view
+      +tags: ["staging", "cleaning"]
 
     intermediate:
-      +materialized: view
       +schema: intermediate
+      +materialized: view
+      +tags: ["intermediate", "business_logic"]
 
     marts:
-      +materialized: table
       +schema: marts
+      +materialized: table
+      +tags: ["marts", "bi_ready"]
+
+seeds:
+  mercado:
+    +schema: staging
+
+snapshots:
+  mercado:
+    +target_schema: snapshots
+
+tests:
+  +store_failures: true
+  +schema: test_failures
+
+quoting:
+  database: false
+  schema: false
+  identifier: false
