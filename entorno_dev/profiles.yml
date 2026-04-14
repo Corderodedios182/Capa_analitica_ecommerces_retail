@@ -1,0 +1,22 @@
+# profiles.yml — Perfil dbt preconfigurado para la prueba técnica
+# Ubicación dentro del contenedor: /root/.dbt/profiles.yml
+#
+# El warehouse se guarda en /workspace/data/warehouse/mercado.duckdb
+# Si trabajas fuera del contenedor, ajusta la ruta 'path' según tu entorno.
+
+mercado:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: /workspace/data/warehouse/mercado.duckdb
+      threads: 4
+      # Variables de negocio configurables — modifícalas sin tocar los modelos
+      vars:
+        plazo_devolucion_dias: 30
+        ventana_cliente_activo_meses: 12
+        umbral_recompra_dias: 7
+        canales_validos:
+          - MERCADOLIBRE
+          - AMAZON
+          - TIENDA_PROPIA

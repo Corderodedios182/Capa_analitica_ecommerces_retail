@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Archivos crudos de Mercado montados en /workspace/data/raw/"
+    tables:
+      - name: clientes_cdmx
+        description: "Fragmento de clientes de CDMX (CSV)"
+      - name: clientes_gdl_mty
+        description: "Fragmento de clientes de Guadalajara y Monterrey (CSV)"
+      - name: clientes_resto
+        description: "Fragmento de clientes del resto del país (Parquet)"
+      - name: catalogo_productos
+        description: "Catálogo de productos con SKUs (CSV)"
+      - name: ordenes_2022_2023
+        description: "Órdenes históricas 2022-2023 (Parquet, esquema v1)"
+      - name: ordenes_2024
+        description: "Órdenes 2024 (Parquet, esquema v2 — columnas renombradas)"
+      - name: devoluciones
+        description: "Registro de devoluciones en texto libre (TXT pipe-delimited)"

@@ -1,0 +1,26 @@
+services:
+
+  workspace:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mercado_analytics
+    ports:
+      - "8888:8888"       # Jupyter Lab
+    volumes:
+      # Datos: los datasets RAW viven aquí (solo lectura dentro del contenedor)
+      - ./data/raw:/workspace/data/raw:ro
+      # Warehouse DuckDB: persistente en tu máquina local
+      - ./data/warehouse:/workspace/data/warehouse
+      # Tu código: todo lo que escribas aquí persiste en tu máquina
+      - ./notebooks:/workspace/notebooks
+      - ./scripts:/workspace/scripts
+      - ./sql:/workspace/sql
+      - ./dbt_project:/workspace/dbt_project
+    environment:
+      - PYTHONPATH=/workspace
+      - DBT_PROFILES_DIR=/root/.dbt
+    working_dir: /workspace
+    # Mantiene el contenedor vivo aunque no haya sesión Jupyter activa
+    stdin_open: true
+    tty: true

@@ -1,0 +1,3 @@
+-- models/staging/.gitkeep
+-- Coloca aquí tus modelos de staging: uno por cada fuente de datos.
+-- Ejemplo: stg_clientes_cdmx.sql, stg_ordenes.sql, stg_productos.sql

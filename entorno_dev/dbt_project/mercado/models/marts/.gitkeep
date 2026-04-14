@@ -1,0 +1,3 @@
+-- models/marts/.gitkeep
+-- Coloca aquí tus tablas finales BI-ready.
+-- Mínimo requerido: fct_ordenes.sql y dim_clientes.sql
