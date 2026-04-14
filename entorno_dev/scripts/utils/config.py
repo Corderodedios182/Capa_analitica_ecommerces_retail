@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Dict
 
 
-BASE_DIR = Path("data/raw").resolve().parents[2]
+BASE_DIR = Path("0_Github/Capa_analitica_ecommerces_retail/entorno_dev").resolve().parents[2]
 
 DATA_DIR = BASE_DIR / "data"
 RAW_DIR = DATA_DIR / "raw"
@@ -25,7 +25,7 @@ WAREHOUSE_DIR = DATA_DIR / "warehouse"
 DOCS_DIR = BASE_DIR / "docs"
 DBT_PROJECT_DIR = BASE_DIR / "dbt_project" / "mercado"
 
-SOURCES_CONFIG: Dict[str, Dict] = {
+SOURCES_CONFIG = {
     "clientes_cdmx": {
         "file_name": "clientes_cdmx.csv",
         "path": RAW_DIR / "clientes_cdmx.csv",
